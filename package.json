@@ -1,0 +1,22 @@
+{
+  "name": "mws-restaurant-stage-1",
+  "version": "1.0.0",
+  "description": "Mws project-1 by M. El-Baz",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bazokhan/mws-restaurant-stage-1.git"
+  },
+  "author": "Mohamed El-Baz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bazokhan/mws-restaurant-stage-1/issues"
+  },
+  "homepage": "https://github.com/bazokhan/mws-restaurant-stage-1#readme",
+  "devDependencies": {
+    "http-server": "^0.10.0"
+  }
+}
