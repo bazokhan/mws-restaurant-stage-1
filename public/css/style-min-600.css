@@ -1,0 +1,203 @@
+@media screen and (min-width: 430px) {
+  /* ====================== Navigation ====================== */
+  nav h1 a {
+    font-size: 1rem;
+  }
+
+  /* ============= Bread Crumb ============= */
+  #breadcrumb {
+    font-size: 0.9rem;
+  }
+
+  /* ====================== Restaurant Listing ====================== */
+  /* ============= List Item */
+  #restaurants-list li h1 {
+    font-size: 1.3rem;
+    line-height: 1.2;
+  }
+
+  #restaurants-list p {
+    font-size: 0.9rem;
+  }
+
+  #restaurants-list p:last-of-type {
+    font-size: 0.8rem;
+  }
+
+  /* ============= Restaurant Hours Table ============= */
+  #restaurant-hours tr {
+    border-bottom: solid 1px #ccc;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #restaurant-hours td {
+    font-size: 0.75rem;
+    padding: 0.5rem 2rem 0.2rem 0;
+  }
+
+  /* ============= Reviews Container ============= */
+  /* ============= Title */
+  #reviews-container h2 {
+    font-size: 1.4rem;
+    letter-spacing: 0;
+  }
+
+  /* ============= List Item */
+  #reviews-list li {
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* Viewport 600px and larger */
+@media screen and (min-width: 600px) {
+  /* ====================== Navigation ====================== */
+  nav h1 a {
+    font-size: 1.2rem;
+  }
+
+  /* ============= Bread Crumb ============= */
+  #breadcrumb {
+      font-size: 0.8rem;
+  }
+
+  /* ====================== Restaurant Filtering ====================== */
+  .filter-options select {
+    font-size: 0.9rem;
+    height: 1.8rem;
+    width: calc(50% - 2.2rem);
+  }
+
+  /* ====================== Restaurant Listing ====================== */
+  /* ============= List Item */
+  #restaurants-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #restaurants-list li {
+    margin: 0.5rem;
+    width: calc(50% - 1rem);
+  }
+
+  #restaurants-list li h1 {
+    font-size: 1.1rem;
+    line-height: 1.2;
+  }
+
+  #restaurants-list p {
+    font-size: 0.8rem;
+  }
+
+  /* ====================== Restaurant Details ====================== */
+  /* ============= Sections ============= */
+  #restaurant-container, #reviews-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  /* ============= Restaurant Container ============= */
+  #restaurant-name {
+    font-size: 1.2rem;
+    order: 0;
+  }
+
+  #restaurant-img {
+    max-width: 70%;
+    order: 3;
+    height: auto;
+  }
+
+  #restaurant-cuisine {
+    order: 2;
+  }
+
+  #restaurant-address {
+    width: 100%;
+    order: 1;
+  }
+
+  /* ============= Restaurant Hours Table ============= */
+  #restaurant-hours {
+    width: 30%;
+    order: 4;
+    padding-left: 1rem;
+  }
+
+  /* ============= Reviews Container ============= */
+  /* ============= Title */
+  #reviews-container h2 {
+    font-size: 1.3rem;
+    letter-spacing: 0;
+  }
+
+  /* ============= List Item */
+  #reviews-list li {
+    margin-bottom: 1rem;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  /* ====================== Restaurant Filtering ====================== */
+  .filter-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .filter-options h2 {
+    padding: 0;
+  }
+
+  .filter-options select {
+    width: 33.33%;
+    margin: 0 1rem;
+  }
+
+  /* ====================== Restaurant Listing ====================== */
+  /* ============= List Item */
+  #restaurants-list li {
+    margin: 0.5rem;
+    width: calc(33% - 1rem);
+  }
+
+  /* ====================== Restaurant Details ====================== */
+  /* ============= Sections ============= */
+  #restaurant-container,
+  #reviews-container {
+    align-content: flex-start;
+  }
+
+  #restaurant-container {
+    width: 66.66%;
+  }
+
+  #reviews-container {
+    width: 33.33%;
+  }
+
+  /* ============= Restaurant Container ============= */
+  #restaurant-img {
+    min-width: 100%;
+    height: auto;
+  }
+
+  /* ============= Restaurant Hours Table ============= */
+  #restaurant-hours {
+    width: 100%;
+    order: 4;
+  }
+
+  #restaurant-hours tr {
+    display: table-row;
+  }
+}
+
+/* @media screen and (min-width: 1000px) {
+  main {
+    width: 1000px;
+    margin: 0 auto;
+  }
+} */
