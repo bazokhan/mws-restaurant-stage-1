@@ -1,3 +1,4 @@
+/* Viewport 430px and larger */
 @media screen and (min-width: 430px) {
   /* ====================== Navigation ====================== */
   nav h1 a {
@@ -138,6 +139,7 @@
   }
 }
 
+/* Viewport 960px and larger */
 @media screen and (min-width: 960px) {
   /* ====================== Restaurant Filtering ====================== */
   .filter-options {
@@ -194,10 +196,3 @@
     display: table-row;
   }
 }
-
-/* @media screen and (min-width: 1000px) {
-  main {
-    width: 1000px;
-    margin: 0 auto;
-  }
-} */
