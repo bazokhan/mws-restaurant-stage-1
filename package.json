@@ -4,6 +4,7 @@
   "description": "Mws project-1 by M. El-Baz",
   "main": "index.js",
   "scripts": {
+    "build": "grunt",
     "start": "http-server -c-1"
   },
   "repository": {
@@ -17,6 +18,11 @@
   },
   "homepage": "https://github.com/bazokhan/mws-restaurant-stage-1#readme",
   "devDependencies": {
+    "grunt": "^1.0.2",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-mkdir": "^1.0.0",
+    "grunt-responsive-images": "^1.10.1",
     "http-server": "^0.10.0"
   }
 }

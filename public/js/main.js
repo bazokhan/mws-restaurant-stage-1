@@ -140,8 +140,22 @@ createRestaurantHTML = (restaurant) => {
 
   const image = document.createElement('img');
   image.className = 'restaurant-img';
-  image.src = DBHelper.imageUrlForRestaurant(restaurant);
   image.setAttribute('alt', restaurant.name + ' Restaurant');
+
+  const imageName = DBHelper.imageUrlForRestaurant(restaurant);
+
+  // Images are generated at sizes: 400w, 600w, 800w
+  const imageS = imageName.replace(/\./, '-400.'); // Small image
+  const imageM = imageName.replace(/\./, '-600.'); // Medium image
+  const imageL = imageName.replace(/\./, '-800.'); // Large image
+  image.src = imageS;
+
+  const imageSrcset = imageS + ' 400w, ' + imageM + ' 600w, ' + imageL + ' 800w';
+  image.setAttribute('srcset', imageSrcset);
+
+  // Image width changes at breakpoints min-600px, min-960px
+  image.setAttribute('sizes', '(min-width: 960px) 33.33vw, (min-width: 600px) 50vw, 100vw');
+
   li.append(image);
 
   const name = document.createElement('h1');
