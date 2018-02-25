@@ -4,7 +4,7 @@
   "description": "Mws project-1 by M. El-Baz",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "http-server -c-1"
   },
   "repository": {
     "type": "git",
