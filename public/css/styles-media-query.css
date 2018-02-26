@@ -21,46 +21,46 @@
 
   /* ============= Restaurant Listing ============= */
   /* ============= List Item */
-  #restaurants-list li h1 {
+  .restaurants-list li h2 {
     font-size: 1.3rem;
     line-height: 1.2;
   }
 
-  #restaurants-list p {
+  .restaurants-list p {
     font-size: 0.9rem;
   }
 
-  #restaurants-list p:last-of-type {
+  .restaurants-list p:last-of-type {
     font-size: 0.8rem;
   }
 
   /* ====================== Restaurant Page ====================== */
   /* ============= Bread Crumb ============= */
-  #breadcrumb {
+  .breadcrumb {
     font-size: 0.9rem;
   }
 
   /* ============= Restaurant Hours Table ============= */
-  #restaurant-hours tr {
+  .restaurant-container table tr {
     border-bottom: solid 1px #ccc;
     display: flex;
     flex-direction: column;
   }
 
-  #restaurant-hours td {
+  .restaurant-container table td {
     font-size: 0.75rem;
     padding: 0.5rem 2rem 0.2rem 0;
   }
 
   /* ============= Reviews Container ============= */
   /* ============= Title */
-  #reviews-container h2 {
+  .restaurant-container table h2 {
     font-size: 1.4rem;
     letter-spacing: 0;
   }
 
   /* ============= List Item */
-  #reviews-list li {
+  .reviews-list li {
     margin-bottom: 1.5rem;
   }
 }
@@ -74,70 +74,63 @@
 
 
   /* ====================== Home Page ====================== */
-  /* ============== Restaurant Filtering ============== */
-  /* .filter-options select {
-    font-size: 0.9rem;
-    height: 1.8rem;
-    width: calc(50% - 2.2rem);
-  } */
-
   /* ============= Restaurant Listing ============= */
   /* ============= List Item */
-  #restaurants-list {
+  .restaurants-list {
     display: flex;
     flex-wrap: wrap;
   }
 
-  #restaurants-list li {
+  .restaurants-list li {
     margin: 0.5rem;
     width: calc(50% - 1rem);
   }
 
-  #restaurants-list li h1 {
+  .restaurants-list li h2 {
     font-size: 1.1rem;
     line-height: 1.2;
   }
 
-  #restaurants-list p {
+  .restaurants-list p {
     font-size: 0.8rem;
   }
 
   /* ====================== Restaurant Page ====================== */
   /* ============= Bread Crumb ============= */
-  #breadcrumb {
+  .breadcrumb {
     font-size: 0.8rem;
   }
 
   /* ============= Sections ============= */
-  #restaurant-container, #reviews-container {
+  .restaurant-container, .reviews-container {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
   }
 
   /* ============= Restaurant Container ============= */
-  #restaurant-name {
+  .restaurant-container h1 {
     font-size: 1.2rem;
     order: 0;
   }
 
-  #restaurant-img {
+  .restaurant-container img {
     width: 70%;
     order: 3;
     height: auto;
   }
 
-  #restaurant-cuisine {
+  .restaurant-cuisine {
     order: 2;
   }
 
-  #restaurant-address {
+  .restaurant-address {
     width: 100%;
     order: 1;
   }
 
   /* ============= Restaurant Hours Table ============= */
-  #restaurant-hours {
+  .restaurant-container table {
     width: 30%;
     order: 4;
     padding-left: 1rem;
@@ -145,13 +138,13 @@
 
   /* ============= Reviews Container ============= */
   /* ============= Title */
-  #reviews-container h2 {
+  .reviews-container h2 {
     font-size: 1.3rem;
     letter-spacing: 0;
   }
 
   /* ============= List Item */
-  #reviews-list li {
+  .reviews-list li {
     margin-bottom: 1rem;
   }
 }
@@ -175,39 +168,39 @@
 
   /* ============= Restaurant Listing ============= */
   /* ============= List Item */
-  #restaurants-list li {
+  .restaurants-list li {
     margin: 0.5rem;
     width: calc(33% - 1rem);
   }
 
   /* ====================== Restaurant Page ====================== */
   /* ============= Sections ============= */
-  #restaurant-container,
-  #reviews-container {
+  .restaurant-container,
+  .reviews-container {
     align-content: flex-start;
   }
 
-  #restaurant-container {
+  .restaurant-container {
     width: 66.66%;
   }
 
-  #reviews-container {
+  .reviews-container {
     width: 33.33%;
   }
 
   /* ============= Restaurant Container ============= */
-  #restaurant-img {
+  .restaurant-container img {
     min-width: 100%;
     height: auto;
   }
 
   /* ============= Restaurant Hours Table ============= */
-  #restaurant-hours {
+  .restaurant-container table {
     width: 100%;
     order: 4;
   }
 
-  #restaurant-hours tr {
+  .restaurant-container table tr {
     display: table-row;
   }
 }
