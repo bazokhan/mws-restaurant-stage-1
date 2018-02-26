@@ -5,12 +5,21 @@
     font-size: 1rem;
   }
 
-  /* ============= Bread Crumb ============= */
-  #breadcrumb {
-    font-size: 0.9rem;
+  /* ====================== Home Page ====================== */
+  /* ============== Restaurant Filtering ============== */
+  .filter-options label {
+    font-size: 1rem;
+    width: 40%;
   }
 
-  /* ====================== Restaurant Listing ====================== */
+  .filter-options select {
+    font-size: 0.9rem;
+    height: 1.8rem;
+    /* width: calc(50% - 2.2rem); */
+    width: 60%;
+  }
+
+  /* ============= Restaurant Listing ============= */
   /* ============= List Item */
   #restaurants-list li h1 {
     font-size: 1.3rem;
@@ -23,6 +32,12 @@
 
   #restaurants-list p:last-of-type {
     font-size: 0.8rem;
+  }
+
+  /* ====================== Restaurant Page ====================== */
+  /* ============= Bread Crumb ============= */
+  #breadcrumb {
+    font-size: 0.9rem;
   }
 
   /* ============= Restaurant Hours Table ============= */
@@ -57,19 +72,16 @@
     font-size: 1.2rem;
   }
 
-  /* ============= Bread Crumb ============= */
-  #breadcrumb {
-      font-size: 0.8rem;
-  }
 
-  /* ====================== Restaurant Filtering ====================== */
-  .filter-options select {
+  /* ====================== Home Page ====================== */
+  /* ============== Restaurant Filtering ============== */
+  /* .filter-options select {
     font-size: 0.9rem;
     height: 1.8rem;
     width: calc(50% - 2.2rem);
-  }
+  } */
 
-  /* ====================== Restaurant Listing ====================== */
+  /* ============= Restaurant Listing ============= */
   /* ============= List Item */
   #restaurants-list {
     display: flex;
@@ -90,7 +102,12 @@
     font-size: 0.8rem;
   }
 
-  /* ====================== Restaurant Details ====================== */
+  /* ====================== Restaurant Page ====================== */
+  /* ============= Bread Crumb ============= */
+  #breadcrumb {
+    font-size: 0.8rem;
+  }
+
   /* ============= Sections ============= */
   #restaurant-container, #reviews-container {
     display: flex;
@@ -105,7 +122,7 @@
   }
 
   #restaurant-img {
-    max-width: 70%;
+    width: 70%;
     order: 3;
     height: auto;
   }
@@ -141,31 +158,29 @@
 
 /* Viewport 960px and larger */
 @media screen and (min-width: 960px) {
-  /* ====================== Restaurant Filtering ====================== */
+  /* ====================== Home Page ====================== */
+  /* ============= Restaurant Filtering ============= */
   .filter-options {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
+    justify-content: space-between;
+    padding: 1rem 2rem;
   }
 
-  .filter-options h2 {
-    padding: 0;
+  .filter-options label {
+    width: auto;
   }
 
   .filter-options select {
-    width: 33.33%;
-    margin: 0 1rem;
+    width: 30%;
   }
 
-  /* ====================== Restaurant Listing ====================== */
+  /* ============= Restaurant Listing ============= */
   /* ============= List Item */
   #restaurants-list li {
     margin: 0.5rem;
     width: calc(33% - 1rem);
   }
 
-  /* ====================== Restaurant Details ====================== */
+  /* ====================== Restaurant Page ====================== */
   /* ============= Sections ============= */
   #restaurant-container,
   #reviews-container {
