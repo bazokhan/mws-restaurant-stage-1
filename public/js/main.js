@@ -17,10 +17,10 @@ class ServiceWorker {
     this.confirmButton = document.getElementById('dialog-confirm');
     this.cancelButton = document.getElementById('dialog-cancel');
     this.focusBeforeDialog = null;
-    // Mouse and keyboard events
-    this.confirmListener = null;
-    this.cancelListener = null;
-    this.KeyboardListener = null;
+    // Event Listeners
+    this._confirmUpdate = this._confirmUpdate.bind(this);
+    this._cancelUpdate = this._cancelUpdate.bind(this);
+    this._handleKeyboardEvents = this._handleKeyboardEvents.bind(this);
   }
 
   register() {
@@ -39,54 +39,41 @@ class ServiceWorker {
         }
         if (reg.installing) {
           this.worker = reg.installing;
-          this._trackWorker(this._showDialog);
+          this._trackWorker();
           return;
         }
-        reg.addEventListener('updatefound', event => {
+        reg.addEventListener('updatefound', (event) => {
           this.worker = reg.installing;
-          this._trackWorker(this._showDialog);
+          this._trackWorker();
         });
       })
   }
 
-  _trackWorker(callback) {
-    this.worker.addEventListener('statechange', event => {
-      if (this.worker.state === 'installed') callback();
-    })
+  _trackWorker() {
+    this.worker.addEventListener('statechange', (event) => {
+      if (this.worker.state === 'installed') {
+        this._showDialog();
+      }
+    });
   }
 
   _showDialog() {
-    // Show the dialog
     this.container.classList.add('show-dialog');
     // Add click events
-    this.confirmListener = this.confirmButton.addEventListener('click', e => this._confirmUpdate());
-    this.cancelListener = this.cancelButton.addEventListener('click', e => this._cancelUpdate());
-    // Lock focus
+    this.confirmButton.addEventListener('click', this._confirmUpdate);
+    this.cancelButton.addEventListener('click', this._cancelUpdate);
+    // Change focus
     this.focusBeforeDialog = document.activeElement;
     this.confirmButton.focus();
     // Add keyboard events
-    this.KeyboardListener = window.addEventListener('keydown', e => {
-      if (e.code === 'Escape') {
-        e.preventDefault();
-        this._hideDialog();
-      }
-      if (e.code === 'Tab') {
-        e.preventDefault();
-        if (document.activeElement === this.confirmButton) {
-          this.cancelButton.focus();
-        } else {
-          this.confirmButton.focus();
-        }
-      }
-    })
+    window.addEventListener('keydown', this._handleKeyboardEvents);
   }
 
   _hideDialog() {
-    // Hide dialog
     this.container.classList.remove('show-dialog');
     // Remove click events
-    this.confirmButton.removeEventListener('click', this.confirmListener);
-    this.cancelButton.removeEventListener('click', this.cancelListener);
+    this.confirmButton.removeEventListener('click', this._confirmUpdate);
+    this.cancelButton.removeEventListener('click', this._cancelUpdate);
     // Restore focus
     if (this.focusBeforeDialog) {
       this.focusBeforeDialog.focus();
@@ -94,12 +81,12 @@ class ServiceWorker {
       document.querySelector('a').focus();
     }
     // Remove keyboard events
-    window.removeEventListener('keydown', this.KeyboardListener);
+    window.removeEventListener('keydown', this._handleKeyboardEvents);
   }
 
   _confirmUpdate() {
     this.worker.postMessage({action: 'skipWaiting'});
-    navigator.serviceWorker.addEventListener('controllerchange', event => {
+    navigator.serviceWorker.addEventListener('controllerchange', (event) => {
       window.location.reload();
     })
     this._hideDialog();
@@ -108,16 +95,31 @@ class ServiceWorker {
   _cancelUpdate() {
     this._hideDialog();
   }
+
+  _handleKeyboardEvents(event) {
+    if (event.code === 'Escape') {
+      event.preventDefault();
+      this._hideDialog();
+    }
+    if (event.code === 'Tab') {
+      event.preventDefault();
+      if (document.activeElement === this.confirmButton) {
+        this.cancelButton.focus();
+      } else {
+        this.confirmButton.focus();
+      }
+    }
+  }
 }
 
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
 document.addEventListener('DOMContentLoaded', (event) => {
-  // registerServiceWorker();
-  new ServiceWorker('/sw.js').register();
   fetchNeighborhoods();
   fetchCuisines();
+  const sw = new ServiceWorker('/sw.js')
+  sw.register();
 });
 
 /**

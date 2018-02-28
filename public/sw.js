@@ -1,4 +1,4 @@
-const currentStaticCache = 'rr-static-v01';
+const currentStaticCache = 'rr-static-v02';
 const currentImageCache = 'rr-images';
 const currentCaches = [
   currentStaticCache,
@@ -18,7 +18,7 @@ const urlsToCache = [
 /**
  * Cache static assets
  */
-self.addEventListener('install', event => {
+self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(currentStaticCache)
       .then(cache => {
@@ -30,7 +30,7 @@ self.addEventListener('install', event => {
 /**
  * Delete old caches
  */
-self.addEventListener('activate', event => {
+self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys()
       .then(cacheNames => {
@@ -45,7 +45,7 @@ self.addEventListener('activate', event => {
 /**
  * Respond to requests from cache first
  */
-self.addEventListener('fetch', event => {
+self.addEventListener('fetch', (event) => {
 
   const url = new URL(event.request.url);
 
@@ -88,7 +88,10 @@ getStaticCache = (url) => {
 
 // Images
 getCachedImage = (url) => {
+
+  // Remove size and extension from image url
   const storageUrl = url.replace(/-\d+\.jpg/);
+
   return caches.open(currentImageCache)
     .then(cache => {
       return cache.match(storageUrl)
@@ -106,7 +109,7 @@ getCachedImage = (url) => {
 /**
  * Waiting SW takes control
  */
-self.addEventListener('message', event => {
+self.addEventListener('message', (event) => {
   if (event.data.action === 'skipWaiting') {
     self.skipWaiting();
   }
