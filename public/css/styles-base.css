@@ -125,6 +125,46 @@ nav h1 a {
   width: 100%;
 }
 
+/* ====================== ServiceWorker Dialog ====================== */
+.dialog-container {
+  position: fixed;
+  bottom: 0;
+  transform: translate(0, 1000px);
+  transition: transform 0.5s;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  background: rgba(51, 51, 51, 0.9);
+  padding: 1rem;
+  width: 100%;
+}
+
+.dialog-container.show-dialog {
+  transform: translate(0, 0);
+}
+
+.dialog-container h2 {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 200;
+  width: 100%;
+}
+
+.dialog-container button {
+  border: none;
+  border-radius: 3px;
+  background: #01447e;
+  color: #fff;
+  padding: 1rem 2rem;
+  margin-left: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.dialog-container button:hover {
+  background: #256b9b;
+}
+
 /* ====================== Home Page ====================== */
 /* ============= Restaurant Filtering ============= */
 .filter-options {
@@ -166,7 +206,6 @@ nav h1 a {
   letter-spacing: 0;
   margin: 0.5rem 0;
   padding: 0 1rem;
-  /* width: calc(100% - 2rem); */
   width: 100%;
 }
 
@@ -298,7 +337,7 @@ nav h1 a {
 }
 
 .restaurant-container img {
-  max-width: 100%;
+  width: 100%;
   border-top-left-radius: 1.5rem;
 }
 

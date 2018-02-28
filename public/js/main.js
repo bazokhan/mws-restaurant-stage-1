@@ -1,13 +1,121 @@
 let restaurants,
   neighborhoods,
-  cuisines
-var map
-var markers = []
+  cuisines;
+var map;
+var markers = [];
+var google;
+
+/**
+ * Service Worker
+ */
+class ServiceWorker {
+  constructor(url) {
+    this.url = url;
+    this.worker = null;
+    // DOM reference
+    this.container = document.getElementById('dialog-container');
+    this.confirmButton = document.getElementById('dialog-confirm');
+    this.cancelButton = document.getElementById('dialog-cancel');
+    this.focusBeforeDialog = null;
+    // Mouse and keyboard events
+    this.confirmListener = null;
+    this.cancelListener = null;
+    this.KeyboardListener = null;
+  }
+
+  register() {
+    if (!navigator || !navigator.serviceWorker) return;
+    navigator.serviceWorker.register(this.url)
+      .then(reg => {
+        /**
+         * Listen for serviceWorker updates and
+         * show a dialog to prompt user for update
+         */
+        if (!navigator.serviceWorker.controller) return;
+        if (reg.waiting) {
+          this.worker = reg.waiting;
+          this._showDialog();
+          return;
+        }
+        if (reg.installing) {
+          this.worker = reg.installing;
+          this._trackWorker(this._showDialog);
+          return;
+        }
+        reg.addEventListener('updatefound', event => {
+          this.worker = reg.installing;
+          this._trackWorker(this._showDialog);
+        });
+      })
+  }
+
+  _trackWorker(callback) {
+    this.worker.addEventListener('statechange', event => {
+      if (this.worker.state === 'installed') callback();
+    })
+  }
+
+  _showDialog() {
+    // Show the dialog
+    this.container.classList.add('show-dialog');
+    // Add click events
+    this.confirmListener = this.confirmButton.addEventListener('click', e => this._confirmUpdate());
+    this.cancelListener = this.cancelButton.addEventListener('click', e => this._cancelUpdate());
+    // Lock focus
+    this.focusBeforeDialog = document.activeElement;
+    this.confirmButton.focus();
+    // Add keyboard events
+    this.KeyboardListener = window.addEventListener('keydown', e => {
+      if (e.code === 'Escape') {
+        e.preventDefault();
+        this._hideDialog();
+      }
+      if (e.code === 'Tab') {
+        e.preventDefault();
+        if (document.activeElement === this.confirmButton) {
+          this.cancelButton.focus();
+        } else {
+          this.confirmButton.focus();
+        }
+      }
+    })
+  }
+
+  _hideDialog() {
+    // Hide dialog
+    this.container.classList.remove('show-dialog');
+    // Remove click events
+    this.confirmButton.removeEventListener('click', this.confirmListener);
+    this.cancelButton.removeEventListener('click', this.cancelListener);
+    // Restore focus
+    if (this.focusBeforeDialog) {
+      this.focusBeforeDialog.focus();
+    } else {
+      document.querySelector('a').focus();
+    }
+    // Remove keyboard events
+    window.removeEventListener('keydown', this.KeyboardListener);
+  }
+
+  _confirmUpdate() {
+    this.worker.postMessage({action: 'skipWaiting'});
+    navigator.serviceWorker.addEventListener('controllerchange', event => {
+      window.location.reload();
+    })
+    this._hideDialog();
+  }
+
+  _cancelUpdate() {
+    this._hideDialog();
+  }
+}
 
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
 document.addEventListener('DOMContentLoaded', (event) => {
+  // registerServiceWorker();
+  new ServiceWorker('/sw.js').register();
   fetchNeighborhoods();
   fetchCuisines();
 });
@@ -75,11 +183,13 @@ window.initMap = () => {
     lat: 40.722216,
     lng: -73.987501
   };
-  self.map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 12,
-    center: loc,
-    scrollwheel: false
-  });
+  if(google) {
+    self.map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 12,
+      center: loc,
+      scrollwheel: false
+    });
+  }
   updateRestaurants();
 }
 
@@ -186,9 +296,11 @@ addMarkersToMap = (restaurants = self.restaurants) => {
   restaurants.forEach(restaurant => {
     // Add marker to the map
     const marker = DBHelper.mapMarkerForRestaurant(restaurant, self.map);
-    google.maps.event.addListener(marker, 'click', () => {
-      window.location.href = marker.url
-    });
+    if (google) {
+      google.maps.event.addListener(marker, 'click', () => {
+        window.location.href = marker.url
+      });
+    }
     self.markers.push(marker);
   });
 }
