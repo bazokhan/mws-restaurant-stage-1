@@ -1,40 +1,35 @@
 let restaurant;
-var map;
-var google;
 
 /**
- * Initialize Google map, called from HTML.
+ * Fetch restaurant form page url as soon as the page is loaded.
+ */
+document.addEventListener('DOMContentLoaded', (event) => {
+  fetchRestaurantFromURL();
+});
+
+/**
+ * Initialize Google map.
  */
 window.initMap = () => {
-  fetchRestaurantFromURL((error, restaurant) => {
-    if (error) { // Got an error!
-      console.error(error);
-    } else {
-      if (google) {
-        self.map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 16,
-          center: restaurant.latlng,
-          scrollwheel: false
-        });
-      }
-      fillBreadcrumb();
-      DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
-    }
+  self.map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 16,
+    center: self.restaurant.latlng,
+    scrollwheel: false
   });
+  DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
 }
 
 /**
  * Get current restaurant from page URL.
  */
-fetchRestaurantFromURL = (callback) => {
+fetchRestaurantFromURL = () => {
   if (self.restaurant) { // restaurant already fetched!
-    callback(null, self.restaurant)
     return;
   }
   const id = getParameterByName('id');
   if (!id) { // no id found in URL
     error = 'No restaurant id in URL'
-    callback(error, null);
+    console.error(error);
   } else {
     DBHelper.fetchRestaurantById(id, (error, restaurant) => {
       self.restaurant = restaurant;
@@ -43,7 +38,7 @@ fetchRestaurantFromURL = (callback) => {
         return;
       }
       fillRestaurantHTML();
-      callback(null, restaurant)
+      fillBreadcrumb();
     });
   }
 }
@@ -59,6 +54,23 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   address.innerHTML = restaurant.address;
 
   const image = document.getElementById('restaurant-img');
+  fillRestaurantImage(image);
+
+  const cuisine = document.getElementById('restaurant-cuisine');
+  cuisine.innerHTML = restaurant.cuisine_type;
+
+  // fill operating hours
+  if (restaurant.operating_hours) {
+    fillRestaurantHoursHTML();
+  }
+  // fill reviews
+  fillReviewsHTML();
+}
+
+/**
+ * Set reaturant image attributes: alt, src, srcset, sizes
+ */
+fillRestaurantImage = (image, restaurant = self.restaurant) => {
   image.className = 'restaurant-img';
   image.setAttribute('alt', restaurant.name + ' Restaurant');
 
@@ -75,16 +87,6 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
 
   // Image width changes at breakpoints min-600px, min-960px
   image.setAttribute('sizes', '(min-width: 960px) 66.66vw, (min-width: 600px) 33.33vw, 100vw');
-
-  const cuisine = document.getElementById('restaurant-cuisine');
-  cuisine.innerHTML = restaurant.cuisine_type;
-
-  // fill operating hours
-  if (restaurant.operating_hours) {
-    fillRestaurantHoursHTML();
-  }
-  // fill reviews
-  fillReviewsHTML();
 }
 
 /**

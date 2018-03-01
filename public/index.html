@@ -27,29 +27,28 @@
 
   <main id="maincontent">
     <section>
+      <!-- Begin Filtering options -->
       <div class="filter-options">
         <h2>Filter Results</h2>
         <label for="neighborhoods-select">Neighborhoods</label>
-        <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
+        <select id="neighborhoods-select" name="neighborhoods">
           <option value="all">All Neighborhoods</option>
         </select>
         <label for="cuisines-select">Cuisines</label>
-        <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()">
+        <select id="cuisines-select" name="cuisines">
           <option value="all">All Cuisines</option>
         </select>
       </div>
+      <!-- End Filtering options -->
+      <!-- Begin Restaurant list -->
       <ul class="restaurants-list" id="restaurants-list"></ul>
+      <!-- End Restaurant list -->
     </section>
     <section class="map-container" id="map-container">
       <h2 class="offscreen">Map of restaurants</h2>
       <div class="map" id="map"></div>
     </section>
   </main>
-
-  <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
-  <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_RfshdtuwWEBKuHXBJZSRajo1euIBiBo&libraries=places&callback=initMap"></script>
-
 
   <footer id="footer">
     Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
@@ -61,6 +60,11 @@
     <button class="dialog-button" id="dialog-confirm">Update</button>
     <button class="dialog-button" id="dialog-cancel">Cancel</button>
   </div>
+
+  <script src="js/dbhelper.js"></script>
+  <script src="js/main.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_RfshdtuwWEBKuHXBJZSRajo1euIBiBo&libraries=places&callback=initMap"></script>
+
 </body>
 
 </html>
