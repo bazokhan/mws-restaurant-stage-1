@@ -262,6 +262,49 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
 }
 
 /**
+ * Create restaurant image and lazy load it.
+ */
+createRestaurantImage = (restaurant) => {
+  const image = document.createElement('img');
+  const imageName = DBHelper.imageUrlForRestaurant(restaurant);
+  image.className = 'restaurant-img';
+  image.id = imageName;
+  image.src = '/img/placeholder.jpg'
+  image.setAttribute('alt', restaurant.name + ' Restaurant');
+
+  // Get srcset: Images are generated at sizes: 400w, 600w, 800w
+  const imageS = imageName.replace(/\./, '-400.'); // Small image
+  const imageM = imageName.replace(/\./, '-600.'); // Medium image
+  const imageL = imageName.replace(/\./, '-800.'); // Large image
+  const imageSrcset = imageS + ' 400w, ' + imageM + ' 600w, ' + imageL + ' 800w';
+
+  // Add attributes: data-src, data-srcset
+  image.setAttribute('data-src', imageS);
+  image.setAttribute('data-srcset', imageSrcset);
+
+  // Add Sizes attribute: Image width changes at breakpoints min-600px, min-960px
+  image.setAttribute('sizes', '(min-width: 960px) 33.33vw, (min-width: 600px) 50vw, 100vw');
+
+  return image;
+}
+
+lazyLoad = (entries, observer = imagesObserver) => {
+  entries.forEach(entry => {
+    const image = entry.target;
+    const imageSrc = image.getAttribute('data-src');
+    const imageSrcSet = image.getAttribute('data-srcset');
+    // console.log(entry);
+    if (entry.isIntersecting) {
+      image.src = imageSrc;
+      image.setAttribute('srcset', imageSrcSet);
+      observer.unobserve(image);
+    }
+  });
+};
+
+const imagesObserver = new IntersectionObserver(lazyLoad, {threshold: 0.2});
+
+/**
  * Create restaurant HTML.
  */
 createRestaurantHTML = (restaurant) => {
@@ -269,7 +312,10 @@ createRestaurantHTML = (restaurant) => {
   const li = document.createElement('li');
 
   // Create restaurant image and add it to the list item
-  li.append(createRestaurantImage(restaurant));
+  const image = createRestaurantImage(restaurant);
+  li.append(image);
+
+  imagesObserver.observe(image);
 
   // Create a heading for restaurant name and add it to the restaurant list item
   const name = document.createElement('h2');
@@ -294,27 +340,6 @@ createRestaurantHTML = (restaurant) => {
   li.append(more);
 
   return li;
-}
-
-createRestaurantImage = (restaurant) => {
-  const image = document.createElement('img');
-  image.className = 'restaurant-img';
-  image.setAttribute('alt', restaurant.name + ' Restaurant');
-
-  const imageName = DBHelper.imageUrlForRestaurant(restaurant);
-
-  // Images are generated at sizes: 400w, 600w, 800w
-  const imageS = imageName.replace(/\./, '-400.'); // Small image
-  const imageM = imageName.replace(/\./, '-600.'); // Medium image
-  const imageL = imageName.replace(/\./, '-800.'); // Large image
-  image.src = imageS;
-
-  const imageSrcset = imageS + ' 400w, ' + imageM + ' 600w, ' + imageL + ' 800w';
-  image.setAttribute('srcset', imageSrcset);
-
-  // Image width changes at breakpoints min-600px, min-960px
-  image.setAttribute('sizes', '(min-width: 960px) 33.33vw, (min-width: 600px) 50vw, 100vw');
-  return image;
 }
 
 /**

@@ -1,5 +1,5 @@
 const currentStaticCache = 'rr-static-v01';
-const currentImageCache = 'rr-images';
+const currentImageCache = 'rr-images-v01';
 const currentCaches = [
   currentStaticCache,
   currentImageCache
@@ -93,7 +93,7 @@ getStaticCache = (url) => {
 getCachedImage = (url) => {
 
   // Remove size and extension from image url
-  const storageUrl = url.replace(/-\d+\.jpg/);
+  const storageUrl = url.replace(/-\d+\.jpg/,'');
 
   return caches.open(currentImageCache)
     .then(cache => {
