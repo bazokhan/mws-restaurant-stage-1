@@ -1,10 +1,13 @@
-const currentStaticCache = 'rr-static-v02';
+const currentStaticCache = 'rr-static-v01';
 const currentImageCache = 'rr-images';
 const currentCaches = [
   currentStaticCache,
   currentImageCache
 ]
 const urlsToCache = [
+  '/manifest.json',
+  '/icons/favicon-16x16.png',
+  '/icons/favicon-32x32.png',
   '/index.html',
   '/restaurant.html',
   '/js/dbhelper.js',
