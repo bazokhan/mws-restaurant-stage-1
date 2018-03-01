@@ -269,7 +269,7 @@ createRestaurantImage = (restaurant) => {
   const imageName = DBHelper.imageUrlForRestaurant(restaurant);
   image.className = 'restaurant-img';
   image.id = imageName;
-  image.src = '/img/placeholder.jpg'
+  image.src = '/icon/placeholder.jpg'
   image.setAttribute('alt', restaurant.name + ' Restaurant');
 
   // Get srcset: Images are generated at sizes: 400w, 600w, 800w
