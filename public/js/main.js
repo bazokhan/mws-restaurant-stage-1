@@ -269,7 +269,7 @@ createRestaurantImage = (restaurant) => {
   const imageName = DBHelper.imageUrlForRestaurant(restaurant);
   image.className = 'restaurant-img';
   image.id = imageName;
-  image.src = '/icon/placeholder.jpg'
+  image.src = '/icons/placeholder.jpg'
   image.setAttribute('alt', restaurant.name + ' Restaurant');
 
   // Get srcset: Images are generated at sizes: 400w, 600w, 800w
@@ -302,7 +302,7 @@ lazyLoad = (entries, observer = imagesObserver) => {
   });
 };
 
-const imagesObserver = new IntersectionObserver(lazyLoad, {threshold: 0.2});
+const imagesObserver = new IntersectionObserver(lazyLoad, {threshold: 0.1});
 
 /**
  * Create restaurant HTML.
