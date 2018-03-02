@@ -11,9 +11,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
  * Initialize Google map.
  */
 window.initMap = () => {
+  /**
+   * TODO: create the map as a callback to fetching the restaurant data
+   * because as currently written, this function can execute before
+   * self.restaurnt is set, throwing a TypeError
+   */
   self.map = new google.maps.Map(document.getElementById('map'), {
     zoom: 16,
-    center: self.restaurant.latlng,
+    // TODO: remove this hack
+    center: self.restaurant ? self.restaurant.latlng : {
+      lat: 40.722216,
+      lng: -73.987501
+    },
     scrollwheel: false
   });
   DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
@@ -113,11 +122,6 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
  * Create all reviews HTML and add them to the webpage.
  */
 fillReviewsHTML = (reviews = self.restaurant.reviews) => {
-  const container = document.getElementById('reviews-container');
-  const title = document.createElement('h2');
-  title.innerHTML = 'Reviews';
-  container.appendChild(title);
-
   if (!reviews) {
     const noReviews = document.createElement('p');
     noReviews.innerHTML = 'No reviews yet!';

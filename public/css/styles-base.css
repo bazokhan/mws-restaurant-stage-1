@@ -327,7 +327,7 @@ nav h1 a {
 }
 
 /* ============= Restaurant Container ============= */
-.restaurant-container h1 {
+.restaurant-container h2 {
   color: #d07002;
   font-size: 1.5rem;
   font-weight: 200;
@@ -373,7 +373,7 @@ nav h1 a {
 
 /* ============= Reviews Container ============= */
 /* ============= Title */
-.reviews-container h2 {
+.reviews-container h3 {
   color: #d07002;
   font-size: 1.5rem;
   font-weight: 300;
