@@ -282,6 +282,11 @@ nav h1 a {
 }
 
 /* ============= Bread Crumb ============= */
+.breadcrumb-container {
+  width: 100%;
+  padding: 0;
+}
+
 .breadcrumb {
   padding: 1rem;
   list-style: none;
@@ -316,10 +321,6 @@ nav h1 a {
 }
 
 /* ============= Sections ============= */
-/* .inside #map-container {
-  margin-top: 3rem;
-} */
-
 .restaurant-container, .reviews-container {
   padding: 1rem;
   border-bottom: 1px solid #d9d9d9;
