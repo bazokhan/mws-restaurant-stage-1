@@ -4,7 +4,7 @@
   "description": "Mws project-1 by M. El-Baz",
   "main": "index.js",
   "scripts": {
-    "build": "grunt",
+    "graphicsmagick": "grunt",
     "start": "http-server -c-1"
   },
   "repository": {
