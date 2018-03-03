@@ -79,6 +79,9 @@ class ServiceWorker {
     // Change focus
     this.focusBeforeDialog = document.activeElement;
     this.confirmButton.focus();
+    document.querySelector('header').setAttribute('aria-hidden', true);
+    document.querySelector('main').setAttribute('aria-hidden', true);
+    document.querySelector('footer').setAttribute('aria-hidden', true);
     // Add keyboard events
     window.addEventListener('keydown', this._handleKeyboardEvents);
   }
@@ -89,6 +92,9 @@ class ServiceWorker {
     this.confirmButton.removeEventListener('click', this._confirmUpdate);
     this.cancelButton.removeEventListener('click', this._cancelUpdate);
     // Restore focus
+    document.querySelector('header').removeAttribute('aria-hidden');
+    document.querySelector('main').removeAttribute('aria-hidden');
+    document.querySelector('footer').removeAttribute('aria-hidden');
     if (this.focusBeforeDialog) {
       this.focusBeforeDialog.focus();
     } else {
@@ -293,7 +299,6 @@ lazyLoad = (entries, observer = imagesObserver) => {
     const image = entry.target;
     const imageSrc = image.getAttribute('data-src');
     const imageSrcSet = image.getAttribute('data-srcset');
-    // console.log(entry);
     if (entry.isIntersecting) {
       image.src = imageSrc;
       image.setAttribute('srcset', imageSrcSet);
