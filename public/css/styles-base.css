@@ -220,6 +220,9 @@ nav h1 a {
   list-style: outside none none;
   margin: 0;
   padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 /* ============= List Item */
@@ -229,6 +232,7 @@ nav h1 a {
   padding: 1rem;
   margin-bottom: 1rem;
   width: 100%;
+  max-width: 400px;
 }
 
 .restaurants-list .restaurant-img {
